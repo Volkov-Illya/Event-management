@@ -1,0 +1,51 @@
+<div class="event-management">
+    <section>
+        <mat-card class="event-management-block">
+            <div class="left-block">
+                <mat-card-title class="title-page-header">{{'EVENTS.EVENTDETAILS.EVENT' | translate}}:
+                    <span class="full-name">{{event.eventTitle}}</span>
+                    <span *ngIf="editMode" (click)="openDialog()" class="edits">&#9998;</span>
+
+                    <div class="sub-title">
+                        <span *ngFor="let tag of event.tags">#{{tag}}</span>
+                    </div>
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-card-title class="title-page">{{ 'EVENTS.EVENTDETAILS.EXPERTS' | translate }}:
+                        <span class="sub">todo</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{ 'EVENTS.EVENTDETAILS.WHEN' | translate }}:
+                        <span class="sub">{{event.eventStart | date: 'dd.MM.yyyy'}}</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{ 'EVENTS.EVENTDETAILS.REGION' | translate }}:
+                        <span class="sub">{{event.region}}</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{ 'EVENTS.EVENTDETAILS.DOMAIN' | translate }}:
+                        <span *ngFor="let domain of event.domains" class="sub">#{{domain}}</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{ 'EVENTS.EVENTDETAILS.DESCRIPTION' | translate }}:
+                        <span class="sub">{{event.description}}</span>
+                    </mat-card-title>
+                </mat-card-content>
+            </div>
+            <div class="right-img">
+                <img *ngIf="!event.eventLogo.length" mat-card-image src="/assets/home/image-not-found.png" alt="..">
+                <cl-image *ngIf="event.eventLogo.length" secure="true" public-id="{{ event.eventLogo }}" class="cat_image" format="jpg"></cl-image>
+            </div>
+        </mat-card>
+    </section>
+    <section class="company-events-block">
+        <div class="other-companies-container">
+            <h3 class="title">{{ 'EVENTS.EVENTDETAILS.OTHEREVENTS' | translate }}</h3>
+            <div class="companies-block">
+
+            </div>
+        </div>
+        <div class="experts-domain">
+            <h3 class="title">{{ 'EVENTS.EVENTDETAILS.DOMAINEXPERTS' | translate }}</h3>
+            <div class="experts-block">
+
+            </div>
+        </div>
+    </section>
+</div>

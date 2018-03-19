@@ -1,0 +1,179 @@
+<div class="profile-form">
+    <span class="tabs-title">{{ 'PROFILEFORM.ALMOSTRHERE' | translate }}</span>
+    <mat-tab-group #matgroup>
+        <mat-tab class="expert-step-one" label="{{ 'PROFILEFORM.STEP1' | translate }}">
+            <form #step1="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+                    <div class="form-group">
+                        <label for="firstname">{{ 'PROFILEFORM.TITLE.FIRSTNAME' | translate }}</label>
+                        <input placeholder="{{ 'PROFILEFORM.PLACEHOLDER.NAME' | translate }}" type="firstname" id="firstname" class="form-control"
+                            ngModel name="firstname" required firstname #firstname="ngModel">
+                        <span *ngIf="checkStepOne(firstname) || firstname.touched && !firstname.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.FIRSTNAME' | translate }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname">{{ 'PROFILEFORM.TITLE.LASTNAME' | translate }}</label>
+                        <input placeholder="{{ 'PROFILEFORM.PLACEHOLDER.SURNAME' | translate }}" type="lastname" id="lastname" class="form-control"
+                            ngModel name="lastname" required lastname #lastname="ngModel">
+                        <span *ngIf="checkStepOne(lastname) || lastname.touched && !lastname.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.LASTNAME' | translate }}</span>
+                    </div>
+
+                    <div class="form-group middlename-form">
+                        <label for="middlename">{{ 'PROFILEFORM.TITLE.MIDDLENAME' | translate }}</label>
+                        <input placeholder="{{ 'PROFILEFORM.PLACEHOLDER.MIDDLENAME' | translate }}" type="middlename" id="middlename" class="form-control"
+                            ngModel name="middlename" required middlename #middlename="ngModel">
+                        <span *ngIf="checkStepOne(middlename) || middlename.touched && !middlename.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.MIDDLENAME' | translate }}</span>
+                    </div>
+
+                    <div class="age-form">
+                        <mat-form-field class="form-group">
+                            <label for="age">{{ 'PROFILEFORM.TITLE.AGE' | translate }}</label>
+                            <mat-select (change)="setAge($event)" class="form-control" placeholder="{{ 'PROFILEFORM.PLACEHOLDER.AGE' | translate }}"
+                                panelClass="age-dropdown-class" required ngModel name="age" age #age="ngModel">
+                                <mat-option *ngFor="let age of ( 80 | ageList: 18 )" [value]="age">
+                                    {{ age }}
+                                </mat-option>
+                            </mat-select>
+                            <span *ngIf="checkStepOne(age) || age.touched && !age.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.AGE' | translate }}</span>
+
+                        </mat-form-field>
+                    </div>
+
+
+                    <mat-form-field class="form-group experience-form">
+                        <label for="experience">{{ 'PROFILEFORM.TITLE.EXPERIENCE' | translate }}</label>
+                        <mat-select (change)="setExperience($event)" class="form-control" placeholder="{{ 'PROFILEFORM.PLACEHOLDER.EXPERIENCE' | translate }}"
+                            panelClass="experience-dropdown-class" required ngModel name="experience" experience #experience="ngModel">
+                            <mat-option *ngFor="let experience of ( 15 | ageList: 1 )" [value]="experience">
+                                {{ experience }}
+                            </mat-option>
+                        </mat-select>
+                        <span *ngIf="checkStepOne(experience) || experience.touched && !experience.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.EXPERIENCE' | translate }}</span>
+
+                    </mat-form-field>
+
+                </div>
+
+                <button mat-button class="btn-step-1" (click)="goToSecondStep()">
+                    {{ 'PROFILEFORM.NEXT' | translate }}
+                </button>
+            </form>
+        </mat-tab>
+
+        <mat-tab [disabled]="!step1.valid || !age || !experience" class="expert-step-two" label="{{ 'PROFILEFORM.STEP2' | translate }}">
+            <form #step2="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+
+                    <div class="region-form">
+                        <div class="form-group">
+                            <label for="region">{{ 'PROFILEFORM.TITLE.REGION' | translate }}</label>
+                            <div>
+                                <ng4geo-autocomplete (ngModelChange)="checkRegion()" required ngModel name="region" region #region="ngModel" ngDefaultControl
+                                    [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                                <span *ngIf="checkStepTwo(region) || region.touched && !region.valid" class="valid-error">{{ 'PROFILEFORM.ERROR.REGION' | translate }}</span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="works-input">
+                        <label class="works-label" for="work">{{ 'PROFILEFORM.TITLE.WORKDOMAIN' | translate }}</label>
+                        <mat-form-field class="demo-chip-list">
+                            <mat-chip-list #workList>
+                                <mat-chip *ngFor="let work of works" [selectable]="selectable" [removable]="removable" (remove)="removeWork(work)">
+                                    {{work}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+                                <input #worksInput #fileInput="ngModel" ngModel name="works" placeholder="{{ 'PROFILEFORM.PLACEHOLDER.WORKDOMAINS' | translate}}"
+                                    id="works-label" [matChipInputFor]="workList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addWork($event)" (input)="setNewWork($event.target.value)"
+                                />
+                            </mat-chip-list>
+                        </mat-form-field>
+                        <span *ngIf="checkStepTwo(fileInput) || checkWorks(fileInput)" class="valid-error">{{ 'PROFILEFORM.ERROR.WORKDOMAIN' | translate }}</span>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">{{ 'PROFILEFORM.TITLE.DESCRIPTION' | translate }}</label>
+                        <textarea placeholder="{{ 'PROFILEFORM.PLACEHOLDER.DESCRIPTION' | translate }}" rows="4" type="description" id="description"
+                            class="form-control" ngModel name="description" required description #description="ngModel">
+                        </textarea>
+                        <span *ngIf="checkStepTwo(description) || !description.valid && description.touched" class="valid-error">{{ 'PROFILEFORM.ERROR.DESCRIPTION' | translate }}</span>
+                    </div>
+
+                </div>
+
+                <button mat-button class="btn-step-2" (click)="goToThirdStep()">
+                    {{ 'PROFILEFORM.NEXT' | translate }}
+                </button>
+            </form>
+        </mat-tab>
+        <mat-tab [disabled]="!step2.valid || !works.length" class="expert-step-three" label="{{ 'PROFILEFORM.STEP3' | translate }}">
+            <form #step3="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+
+                    <div class="form-group">
+
+                        <div class="avatar-loader">
+                            <label *ngIf="!user.userpic.length" #userpicLabel for="userpic">{{ 'PROFILEFORM.TITLE.UPLOADUSERPIC' | translate }}</label>
+                            <label *ngIf="user.userpic.length" (click)="removeLogo()" class="remove-logo" #userpicLabel for="userpic">{{ 'PROFILEFORM.TITLE.REMOVEUSERPIC' | translate }}</label>
+                            <input type="file" (change)="onChangeUserpic($event)" accept=".jpg, .png, .bmp" id="userpic" class="form-control" name="userpic"
+                                required userpic>
+                            <div *ngIf="!user.userpic.length" class="dropzone" appProfileformUserpic (filesChangeEmiter)="onDragUserpic($event)" (filesInvalidEmiter)="onInvalidDragUserpic($event)"
+                                (click)="onUploadUserpic($event)" [allowed_extensions]="[ 'png', 'jpg', 'bmp' ]">
+                                <div class="text-wrapper">
+                                    <div class="centered">{{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.CLICK' | translate }}
+                                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.OR' | translate }}
+                                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.DRAG' | translate }}</div>
+                                </div>
+                            </div>
+                            <div *ngIf="user.userpic.length" class="image-block">
+                                <cl-image class="cl-image" secure="true" public-id="{{ user.userpic }}" format="jpg">
+                                </cl-image>
+                            </div>
+                        </div>
+
+                        <div class="cv-loader">
+                            <label *ngIf="!user.userCV.length" #cvLabel for="characterVoice">{{ 'PROFILEFORM.TITLE.UPLOADCV' | translate }}</label>
+                            <label *ngIf="user.userCV.length" (click)="removeCV()" class="remove-resume" #cvLabel for="userCV">{{ 'PROFILEFORM.TITLE.REMOVECV' | translate }}</label>
+
+                            <input type="file" (change)="onChangeCV($event)" accept=".pdf, .jpg" id="characterVoice" class="form-control" name="userCV"
+                                required characterVoice>
+
+                            <div *ngIf="!user.userCV.length" class="dropzone" appProfileformCV (filesChangeEmiter)="onFilesChange($event)" (filesInvalidEmiter)="onFileInvalids($event)"
+                                (click)="onUploadCV($event)" [allowed_extensions]="[ 'pdf', 'jpg' ]">
+                                <div class="text-wrapper">
+                                    <div class="centered">{{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.CLICK' | translate }}
+                                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.OR' | translate }}
+                                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.DRAG' | translate }}</div>
+                                </div>
+                            </div>
+                            <div *ngIf="user.userCV.length" class="image-block">
+                                <cl-image class="cl-image" secure="true" public-id="{{ user.userCV }}" format="jpg">
+                                </cl-image>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interests" class="interests">{{ 'PROFILEFORM.TITLE.INTERESTS' | translate }}</label>
+                        <textarea placeholder="{{ 'PROFILEFORM.PLACEHOLDER.INTERESTS' | translate }}" rows="4" type="interests" id="interests" class="form-control"
+                            ngModel name="interests" required interests #interests="ngModel">
+                        </textarea>
+                        <span *ngIf=" checkStepThree(interests) || !interests.valid && interests.touched" class="valid-error">{{ 'PROFILEFORM.ERROR.INTERESTS' | translate }}</span>
+                    </div>
+
+                </div>
+
+                <button mat-button class="btn-step-2" (click)="finishRegistration()">
+                    {{ 'PROFILEFORM.FINISH' | translate }}
+                </button>
+            </form>
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>

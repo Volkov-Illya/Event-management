@@ -1,0 +1,31 @@
+<div class="container sign-in">
+
+    <div class="register-block">
+        <div class="register-header">
+            <h1>Organize and event without pain!</h1>
+        </div>
+        <div class="registration">
+            <h3>{{ 'AUTH.SIGNIN.TITLE' | translate }}</h3>
+            <app-alerts></app-alerts>
+            <form (ngSubmit)="onSubmit()" #f="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel" placeholder="{{ 'AUTH.SIGNIN.EMAIL' | translate }}">
+                        <span *ngIf="!email.valid && email.touched" class="help-block">Please enter a valid email</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" ngModel name="password" required password #password="ngModel" placeholder="{{ 'AUTH.SIGNIN.PASSWORD' | translate }}">
+                        <span *ngIf="!password.valid && password.touched" class="help-block">Please enter a password</span>
+                    </div>
+                </div>
+                <button class="btn sign-btn" type="submit" [disabled]="!f.valid">{{ 'AUTH.SIGNIN.TITLE' | translate | uppercase }}
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>

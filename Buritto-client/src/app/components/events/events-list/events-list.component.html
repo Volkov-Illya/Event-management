@@ -1,0 +1,54 @@
+<div class="events-list">
+    <section class="search-bar">
+        <span (click)="setEventsType('allEvents')" [ngClass]="allEvents === true ? 'all-events' : 'my-events'">{{ 'EVENTS.EVENTSLIST.ALLEVENTS' | translate }} </span>
+        <span (click)="setEventsType('myEvents')" [ngClass]="myEvents === true ? 'all-events' : 'my-events'">/ {{ 'EVENTS.EVENTSLIST.MYEVENTS' | translate }}</span>
+        <div class="search-items">
+
+            <input placeholder="{{ 'EVENTS.EVENTSLIST.SEARCH' | translate }}" type="search" id="search" class="form-control" ngModel
+                name="search" search #search="ngModel" (input)="setSearchValue($event)">
+            <div class="first-picker">
+                <mat-form-field (click)="setFirstDate($event.target.value)" (change)="setFirstDate($event.target.value)" class="from-date">
+                    <input (click)="picker.open()" (input)="setFirstDate($event.target.value)" [matDatepicker]="picker" [(ngModel)]="eventStart"
+                        name="eventStart" matInput placeholder="{{ 'EVENTS.EVENTSLIST.FROMDATE' | translate }}">
+                    <span (click)="picker.open()" class="first-arrow"></span>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker (selectedChanged)="setFirstDate($event)" panelClass="events-from-date-menu" #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="second-picker">
+                <mat-form-field (click)="setSecondDate($event.target.value)" (change)="setSecondDate($event.target.value)" class="from-date">
+                    <input (click)="pickerEnd.open()" (input)="setSecondDate($event.target.value)" [matDatepicker]="pickerEnd" [(ngModel)]="eventFinish"
+                        name="eventFinish" matInput placeholder="{{ 'EVENTS.EVENTSLIST.TODATE' | translate }}">
+                    <span (click)="pickerEnd.open()" class="second-arrow"></span>
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker (selectedChanged)="setSecondDate($event)" panelClass="events-from-date-menu" #pickerEnd></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="region-form">
+                <div class="form-group">
+                    <div>
+                        <ng4geo-autocomplete [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                    </div>
+                </div>
+            </div>
+            <button mat-button class="btn-add-event" (click)="createNewEvent()">
+                {{ 'EVENTS.EVENTSLIST.ADDEVENT' | translate }}
+            </button>
+        </div>
+    </section>
+    <section class="panel-discussion">
+        <div class="progress-spinner">
+            <mat-spinner *ngIf="loading"></mat-spinner>
+        </div>
+        <app-event-item *ngFor="let eventEl of events; let i = index" [event]="eventEl" [index]="i">
+        </app-event-item>
+    </section>
+</div>
+
+<div *ngIf="events && events.length">
+    <app-pagination (changePageEvent)="initPage($event)" [eventsCount]="eventsCount"></app-pagination>
+</div>
+
+<div *ngIf="events && !events.length" class="empty-list">
+    {{ 'EVENTS.EVENTSLIST.NOEVENTS' | translate }}
+</div>

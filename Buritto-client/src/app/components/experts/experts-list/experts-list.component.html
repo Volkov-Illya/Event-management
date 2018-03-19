@@ -1,0 +1,33 @@
+<div class="experts-list">
+    <section class="search-bar">
+        <span class="experts-title">{{ 'EXPERTS.EXPERTSLIST.TITLE' | translate }} </span>
+        <div class="search-items">
+            <input placeholder="{{ 'EXPERTS.EXPERTSLIST.SEARCH' | translate }}" type="search" id="search" class="form-control search"
+                ngModel name="search" search #search="ngModel" (input)="setSearchValue($event)">
+            <div class="region-form">
+                <div class="region-form">
+                    <div class="form-group">
+                        <div>
+                            <ng4geo-autocomplete [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="panel-discussion">
+        <div class="progress-spinner">
+            <mat-spinner *ngIf="loading"></mat-spinner>
+        </div>
+        <app-expert-item *ngFor="let expertEl of experts; let i = index" [expert]="expertEl" [index]="i">
+        </app-expert-item>
+    </section>
+</div>
+
+<div *ngIf="experts && experts.length">
+    <app-pagination (changePageEvent)="initPage($event)" [eventsCount]="expertsCount"></app-pagination>
+</div>
+
+<div *ngIf="experts && !experts.length" class="empty-list">
+    {{ 'EXPERTS.EXPERTSLIST.NOEXPERTS' | translate }}
+</div>

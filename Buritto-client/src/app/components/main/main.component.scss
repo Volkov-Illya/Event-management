@@ -1,0 +1,47 @@
+.experts-block {
+    box-shadow: none;
+    width: 100%;
+}
+.experts-block .card-blockquote {
+    border-left: 0;
+    overflow: hidden;
+    display: flex;
+}
+.experts-block .card-block {
+    background: #c3c3c3;
+    border-radius: 14px;
+}
+.experts-block  .button-row {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    margin: 30px 0;  
+}
+.experts-block .button-row .title {
+    float: left;
+    position: relative;
+}
+.experts-block .button-row .btn-block {
+    float: right;
+    position: relative;
+    line-height: 56px;
+    width: auto;
+}
+.experts-block .button-row .btn-block .mat-raised-button {
+    margin: 0 10px;
+}
+.experts-block .card-blockquote .image-block {
+    position: relative;
+    float: right;
+    margin-left: 15px;
+}
+.experts-block .card-blockquote .image-block .img-responsive {
+    height: 80px;
+    max-width: max-content;
+}
+.experts-block .card-blockquote .info {
+    position: relative;
+    float: left;
+}
+
+

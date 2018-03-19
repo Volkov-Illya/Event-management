@@ -1,0 +1,251 @@
+{
+    "HEADER": {
+        "FEATURES": "Features",
+        "PRICING": "Pricing",
+        "FINISHING": "Finishing registration",
+        "SIGNIN": "Sign in",
+        "OR": "or",
+        "SIGNUP": "Register",
+        "MAIN": "Main",
+        "EXPERTS": "Experts",
+        "EVENTS": "Events",
+        "PROFILE": "Profile",
+        "LOGOUT": "Logout"
+    },
+    "AUTH": {
+        "SIGNIN": {
+            "TITLE": "Sign in",
+            "EMAIL": "you@Example.com",
+            "PASSWORD": "Password"
+        },
+        "SIGNUP": {
+            "TITLE": "Register",
+            "TYPE": "Account type",
+            "TYPES": {
+                "Expert": "Expert",
+                "Event Manager": "Event Manager"
+            },
+            "EMAIL": "you@Example.com",
+            "PASSWORD": "Password",
+            "DESCRIPTION": "Use at least one letter, one numeral, and seven characters."
+        }
+    },
+    "PROFILEFORM": {
+        "ALMOSTRHERE": "Almost there!",
+        "STEP1": "Step 1",
+        "STEP2": "Step 2",
+        "STEP3": "Step 3",
+        "NEXT": "NEXT",
+        "FINISH": "FINISH",
+        "TITLE": {
+            "FIRSTNAME": "First Name",
+            "LASTNAME": "Last name",
+            "MIDDLENAME": "Middle name",
+            "AGE": "Your age",
+            "EXPERIENCE": "Your experience",
+            "REGION": "Region",
+            "WORKDOMAIN": "Domain of work",
+            "DESCRIPTION": "Description",
+            "INTERESTS": "Interests",
+            "MEDIA": "Media",
+            "UPLOADUSERPIC": "Upload your userpic",
+            "REMOVEUSERPIC": "Click to remove avatar",
+            "REMOVECV": "Click to remove CV",
+            "UPLOADCV": "Upload your CV"
+        },
+        "PLACEHOLDER": {
+            "NAME": "Your name",
+            "SURNAME": "Your surname",
+            "MIDDLENAME": "Your middle name",
+            "AGE": "Age",
+            "EXPERIENCE": "1 Year",
+            "WORKDOMAINS": "Example: #work, #economics",
+            "DESCRIPTION": "Describe yourself",
+            "INTERESTS": "Interesting for me",
+            "MEDIA": "Example: #media, #economics",
+            "SEARCH": "Search by city",
+            "UPLOAD": {
+                "CLICK": "Click to upload",
+                "OR": "or",
+                "DRAG": "Drag&Drop"
+            }
+        },
+        "ERROR": {
+            "FIRSTNAME": "Please enter first name",
+            "LASTNAME": "Please enter last name",
+            "MIDDLENAME": "Please enter middle name",
+            "AGE": "Please select age",
+            "EXPERIENCE": "Please select experience",
+            "REGION": "Please select region",
+            "WORKDOMAIN": "Please select domain of work",
+            "DESCRIPTION": "Please enter description",
+            "INTERESTS": "Please enter interests",
+            "MEDIA": "Please enter media"
+        }
+    },
+    "PROFILE": {
+        "EXPERTNAME": "Expert Profile",
+        "MANAGERNAME": "Manager Profile",
+        "COMPANYNAME": "Company",
+        "EXPERIENCE": "Experience",
+        "REGION": "Region",
+        "DOMAIN": "Domain",
+        "MEDIA": "Meadia",
+        "INTERESTS": "Interests",
+        "DESCRIPTION": "Description",
+        "MYCOMPANIES": "My companies",
+        "MYEVENTS": "Events I take part in"
+    },
+    "EVENTS": {
+        "EVENTDETAILS": {
+            "EVENT": "Event",
+            "EXPERTS": "Experts",
+            "WHEN": "When",
+            "REGION": "Region",
+            "DOMAIN": "Domain",
+            "DESCRIPTION": "Description",
+            "OTHEREVENTS": "Other interesting events",
+            "DOMAINEXPERTS": "Experts in this domain"
+        },
+        "CREATEEVENT": {
+            "CREATE": "Create event",
+            "TITLE": {
+                "EVENTTITLE": "Event title",
+                "EVENTSTART": "Event start",
+                "EVENTEND": "Event end",
+                "TAGS": "Tags",
+                "REGION": "Region",
+                "DOMAINS": "Domains",
+                "STATUS": "Status",
+                "DESCRIPTION": "Description",
+                "LOGO": "Upload event logo",
+                "REMOVELOGO": "Click to remove logo"
+            },
+            "PLACEHOLDER": {
+                "EVENTTTILE": "Example: Media vs corruption",
+                "EVENTSTART": "From date",
+                "EVENTEND": "To date",
+                "TAGS": "Example: #media, #economix",
+                "REGION": "Search by city",
+                "DOMAINS": "Example: #Television, #online streaming",
+                "STATUSVALUE": "Planning",
+                "STATUS": {
+                    "Planning": "Planning",
+                    "In progress": "In Progress"
+                },
+                "DESCRIPTION": "Event Description",
+                "LOGO": {
+                    "CLICK": "Click to upload",
+                    "OR": "or",
+                    "DRAG": "Drag&Drop"
+                }
+            }
+        },
+        "EVENTSLIST": {
+            "ALLEVENTS": "All events",
+            "MYEVENTS": "My events",
+            "SEARCH": "Search by name or tag",
+            "SEARCHNG4": "Search by city",
+            "FROMDATE": "From date",
+            "TODATE": "To date",
+            "ADDEVENT": "ADD EVENT",
+            "NOEVENTS": "There are no events yet."
+        },
+        "ITEM": {
+            "TITLE": "Panel discussion",
+            "DATE": "Date",
+            "REGION": "Region",
+            "DOMAINS": "Domains"
+        }
+    },
+    "EXPERTS": {
+        "EXPERTSLIST": {
+            "TITLE": "Experts list",
+            "SEARCH": "Search by name or tag",
+            "SEARCHNG4": "Search by city",
+            "NOEXPERTS": "There are no experts yet."
+        },
+        "ITEM": {
+            "REGION": "Region",
+            "DOMAINS": "Domains"
+        }
+    },
+    "PAGINATION": {
+        "FIRST": "First",
+        "PREVIOUS": "Previous",
+        "NEXT": "Next",
+        "LAST": "Last"
+    },
+    "EDITPROFILE": {
+        "NAME": "Edit profile",
+        "SAVE": "SAVE",
+        "TITLE": {
+            "FIRSTNAME": "First Name",
+            "LASTNAME": "Last name",
+            "MIDDLENAME": "Middle name",
+            "AGE": "Your age",
+            "EXPERIENCE": "Your experience",
+            "REGION": "Region",
+            "WORKDOMAIN": "Domain of work",
+            "DESCRIPTION": "Description",
+            "INTERESTS": "Interests",
+            "MEDIA": "Media"
+        },
+        "PLACEHOLDER": {
+            "NAME": "Your name",
+            "SURNAME": "Your surname",
+            "MIDDLENAME": "Your middle name",
+            "AGE": "Age",
+            "EXPERIENCE": "1 Year",
+            "WORKDOMAINS": "Example: #work, #economics",
+            "DESCRIPTION": "Describe yourself",
+            "INTERESTS": "Interesting for me",
+            "SEARCH": "Search by city",
+            "MEDIA": "Example: #media, #economics"
+        },
+        "ERROR": {
+            "FIRSTNAME": "Please enter first name",
+            "LASTNAME": "Please enter last name",
+            "MIDDLENAME": "Please enter middle name",
+            "AGE": "Please select age",
+            "EXPERIENCE": "Please select experience",
+            "REGION": "Please select region",
+            "WORKDOMAIN": "Please select domain of work",
+            "DESCRIPTION": "Please enter description",
+            "INTERESTS": "Please enter interests",
+            "MEDIA": "Please enter media"
+        }
+    },
+    "EDITEVENT": {
+        "NAME": "Edit event",
+        "SAVE": "SAVE",
+        "TITLE": {
+            "EVENTTITLE": "Event title",
+            "EVENTSTART": "Event start",
+            "EVENTEND": "Event end",
+            "TAGS": "Tags",
+            "REGION": "Region",
+            "DOMAINS": "Domains",
+            "STATUS": "Status",
+            "DESCRIPTION": "Description"
+        },
+        "PLACEHOLDER": {
+            "EVENTTITLE": "Example: Media vs corruption",
+            "EVENTSTART": "From date",
+            "EVENTEND": "To date",
+            "TAGS": "Example: #media, #economix",
+            "REGION": "Search by city",
+            "DOMAINS": "Example: #Television, #online streaming",
+            "STATUSVALUE": "Planning",
+            "STATUS": {
+                "Planning": "Planning",
+                "In progress": "In Progress"
+            },
+            "DESCRIPTION": "Event Description"
+        },
+        "ERROR": {
+            "EVENTTITLE": "Please enter event title",
+            "REGION": "Please select region"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<mat-card class="discussion-expert-card">
+    <mat-card-content class="discussion-block">
+        <div class="image-block">
+            <img *ngIf="!expert.userpic.length" mat-card-image src="assets/home/error-image-generic.png" alt="..">
+            <cl-image *ngIf="expert.userpic && expert.userpic.length" secure="true" public-id="{{ expert.userpic }}" format="jpg"></cl-image>
+        </div>
+        <mat-card-header class="info">
+            <mat-card-title class="info-title info-header">{{ fullname }}</mat-card-title>
+            <mat-card-subtitle class="info-title info-sub">{{ 'EXPERTS.ITEM.REGION' | translate }}: {{ expert.region }}</mat-card-subtitle>
+            <div class="menu-block">
+                <button mat-button [matMenuTriggerFor]="menu" class="test"></button>
+                <mat-menu xPosition="before" #menu="matMenu">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </div>
+        </mat-card-header>
+        <mat-card-footer class="footer">
+            {{ 'EXPERTS.ITEM.DOMAINS' | translate }}:
+            <a *ngFor="let tag of expert.works">#{{tag}}</a>
+        </mat-card-footer>
+    </mat-card-content>
+</mat-card>

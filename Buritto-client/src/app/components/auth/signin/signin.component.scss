@@ -1,0 +1,97 @@
+.container.sign-in {
+    position: relative;
+    overflow: hidden;
+    right: 0;
+    left: 0;
+    height: 462.75px;
+    min-width: 960px;
+    max-width: 960px;
+    .register-block {
+        max-width: 960px;
+        position: relative;
+        margin: 0 auto;
+        overflow: hidden;
+        height: 100%;
+        .register-header {
+            position: relative;
+            float: left;
+            font-family: roboto;
+            color: #ffffff;
+            top: 75px;
+            h1 {
+                line-height: 56.25px;
+                margin: 0;
+                font-size: 50.25px;
+                font-weight: 400;
+                margin-left: 57.75px;
+                width: 427.5px;
+            }
+        }
+        .registration {
+            position: relative;
+            float: right;
+            padding: 18.75px;
+            width: 330px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            top: 47.25px;
+            margin-right: 54.75px;
+            h3 {
+                font-family: sans-serif;
+                font-size: 18px;
+                text-align: left;
+                color: #2b094d;
+                margin: 11.25px 0 30px;
+            }
+            .form-group {
+                min-height: 36px;
+                margin-bottom: 18.75px;
+                .help-block {
+                    position: absolute;
+                    margin:0;
+                    font-size: 13px;
+                }
+                label {
+                    display: none;
+                }
+                input {
+                    font-size: 25px;
+                    color: rgba(0,0,0,.87);
+                }
+                input[type="email"]::placeholder {
+                    color: #b1b1b1;
+                    font-size: 15px;
+                }
+                input[type="password"]::placeholder {
+                    color: #b1b1b1;
+                    font-size: 15px;
+                }
+                .form-control {
+                    height: 36px;
+                    border-radius: 3px;
+                    border: solid 1px rgba(0, 0, 0, 0.19);
+                    color: rgba(0, 0, 0, 0.87);
+                    font-family: roboto;
+                    line-height: 23.25px;
+                    font-size: 15px;
+                    &:focus {
+                        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #7d6399;
+                    }
+                    .mat-select-placeholder {
+                        font-size: 20px;
+                    }
+                    .mat-select-arrow-wrapper {
+                        color: rgba(0,0,0,.42);
+                    }
+                }
+            }
+            .sign-btn {
+                background: rgb(39, 2, 76);
+                width: 100%;
+                height: 41.25px;
+                color: white; 
+                font-size: 15px;
+            }
+        }
+    }
+}

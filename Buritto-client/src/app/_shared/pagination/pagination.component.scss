@@ -1,0 +1,23 @@
+.pagination-panel {
+    width: 960px;
+    margin: 0 auto;
+    text-align: right;
+    .pagination {
+        display: inline-flex;
+        padding-left: 0;
+        margin: 15px 0;
+        border-radius: 4px;
+        li {
+            cursor: pointer;
+            font-size: 14px;
+            a {
+                color: #2b094d;
+            }
+        }
+    }
+    .pagination>.active>a {
+        background: #2b094d;
+        border-color: #2b094d;
+        color: white;
+    }
+}

@@ -1,0 +1,119 @@
+<div class="create-event-form">
+    <span class="create-event-title">{{ 'EVENTS.CREATEEVENT.CREATE' | translate }}</span>
+    <form class="event-form" #createEvent="ngForm">
+        <div class="user-data" ngModelGroup="eventData" #eventData="ngModelGroup">
+
+            <div class="form-group">
+                <label for="eventTitle">{{ 'EVENTS.CREATEEVENT.TITLE.EVENTTITLE' | translate }}</label>
+                <input placeholder="{{ 'EVENTS.CREATEEVENT.PLACEHOLDER.EVENTTTILE' | translate }}" type="eventTitle" id="eventTitle" class="form-control"
+                    ngModel name="eventTitle" required eventTitle #eventTitle="ngModel">
+                <!-- <span *ngIf="!eventTitle.valid && eventTitle.touched" class="help-block">Please enter first name</span> -->
+            </div>
+
+            <div class="form-group">
+                <div class="first-picker">
+                    <label for="firstPicker">{{ 'EVENTS.CREATEEVENT.TITLE.EVENTSTART' | translate }}</label>
+                    <mat-form-field (click)="setFirstDate($event.target.value)" (change)="setFirstDate($event.target.value)" class="from-date">
+                        <input (click)="picker.open()" (input)="setFirstDate($event.target.value)" [matDatepicker]="picker" [(ngModel)]="firstPicker"
+                            name="firstPicker" matInput placeholder="{{ 'EVENTS.CREATEEVENT.PLACEHOLDER.EVENTSTART' | translate }}">
+                        <span (click)="picker.open()" class="first-arrow"></span>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker (selectedChanged)="setFirstDate($event)" panelClass="from-date-menu" #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="second-picker">
+                    <label for="secondPicker">{{ 'EVENTS.CREATEEVENT.TITLE.EVENTEND' | translate }}</label>
+                    <mat-form-field (click)="setSecondDate($event.target.value)" (change)="setSecondDate($event.target.value)" class="from-date">
+                        <input (click)="pickerEnd.open()" (input)="setSecondDate($event.target.value)" [matDatepicker]="pickerEnd" [(ngModel)]="secondPicker"
+                            name="secondPicker" matInput placeholder="{{ 'EVENTS.CREATEEVENT.PLACEHOLDER.EVENTEND' | translate }}">
+                        <span (click)="pickerEnd.open()" class="second-arrow"></span>
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker (selectedChanged)="setSecondDate($event)" panelClass="from-date-menu" #pickerEnd></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="tags-input">
+                <label class="tags-label">{{ 'EVENTS.CREATEEVENT.TITLE.TAGS' | translate }}</label>
+                <mat-form-field class="demo-chip-list">
+                    <mat-chip-list #tagList>
+                        <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (remove)="removeTag(tag)">
+                            {{tag}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #tagsInput [placeholder]="placeholer" [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addTag($event)" (input)="setNewTag($event.target.value)"
+                            id="tags" />
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+
+            <div class="region-form">
+                <div class="form-group">
+                    <label for="region">{{ 'EVENTS.CREATEEVENT.TITLE.REGION' | translate }}</label>
+                    <div>
+                        <ng4geo-autocomplete [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domains-input">
+                <label class="domains-label" for="domains">{{ 'EVENTS.CREATEEVENT.TITLE.DOMAINS' | translate }}</label>
+                <mat-form-field class="demo-chip-list">
+                    <mat-chip-list #domainList>
+                        <mat-chip *ngFor="let domain of domains" [selectable]="selectable" [removable]="removable" (remove)="removeDomain(domain)">
+                            {{domain}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #domainInput [placeholder]="domainPlaceholder" [matChipInputFor]="domainList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addDomain($event)" (input)="setNewDomain($event.target.value)"
+                        />
+                    </mat-chip-list>
+                </mat-form-field>
+            </div>
+
+            <div class="status-form">
+                <mat-form-field class="form-group">
+                    <label for="status">{{ 'EVENTS.CREATEEVENT.TITLE.STATUS' | translate }}</label>
+                    <mat-select (change)="setStatus($event)" class="form-control" placeholder="{{ 'EVENTS.CREATEEVENT.PLACEHOLDER.STATUSVALUE' | translate }}"
+                        panelClass="status-dropdown-class">
+                        <mat-option *ngFor="let status of statuses" [value]="status">
+                            {{ 'EVENTS.CREATEEVENT.PLACEHOLDER.STATUS.' + status | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="description">{{ 'EVENTS.CREATEEVENT.TITLE.DESCRIPTION' | translate }}</label>
+                <textarea placeholder="{{ 'EVENTS.CREATEEVENT.PLACEHOLDER.DESCRIPTION' | translate }}" rows="4" type="description" id="description"
+                    class="form-control" ngModel name="description" required description #description="ngModel">
+                </textarea>
+            </div>
+
+        </div>
+        <div class="logo-loader">
+            <label *ngIf="!event.eventLogo.length" #logoLabel for="logo">{{ 'EVENTS.CREATEEVENT.TITLE.LOGO' | translate }}</label>
+            <label (click)="removeLogo()" class="remove-logo" *ngIf="event.eventLogo.length" #logoLabel for="logo">{{ 'EVENTS.CREATEEVENT.TITLE.REMOVELOGO' | translate }}</label>
+            <input type="file" (change)="onChangeLogo($event)" accept=".jpg, .png, .bmp" id="logo" class="form-control" name="logo" required
+                logo>
+
+            <div *ngIf="!event.eventLogo.length" class="dropzone" appCreateEventLogo (filesChangeEmiter)="onFilesChange($event)" (filesInvalidEmiter)="onFileInvalids($event)"
+                (click)="onUploadLogo($event)" [allowed_extensions]="[ 'png', 'jpg', 'bmp' ]">
+                <div class="text-wrapper">
+                    <div class="centered">{{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.CLICK' | translate }}
+                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.OR' | translate }}
+                        <br> {{ 'PROFILEFORM.PLACEHOLDER.UPLOAD.DRAG' | translate }}</div>
+                </div>
+            </div>
+            <div class="image-block">
+                <cl-image class="cl-image" *ngIf="event.eventLogo.length" secure="true" public-id="{{ event.eventLogo }}" format="jpg">
+                    <!-- <cl-transformation height="236" width="351"></cl-transformation> -->
+                </cl-image>
+            </div>
+        </div>
+    </form>
+    <button mat-button class="btn-create-event" [disabled]="!createEvent.valid || !status.length || loading" (click)="createNewEvent()">
+        CREATE EVENT
+    </button>
+</div>

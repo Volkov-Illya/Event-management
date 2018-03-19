@@ -1,0 +1,127 @@
+<div class="edit-profile">
+    <div class="edit-title">
+        <span>{{ 'EDITPROFILE.NAME' | translate }}</span>
+    </div>
+    <div class="edit-body">
+        <div class="edit-header"></div>
+        <div class="edit-avatar">
+            <label #userpicLabel for="userpic"></label>
+            <input type="file" (change)="onChangeUserpic($event)" accept=".jpg, .png, .bmp" id="userpic" class="form-control" name="userpic"
+                required userpic>
+            <div class="images" appProfileformUserpic (filesChangeEmiter)="onDragUserpic($event)" (filesInvalidEmiter)="onInvalidDragUserpic($event)"
+                (click)="onUploadUserpic($event)" [allowed_extensions]="[ 'png', 'jpg', 'bmp' ]">
+                <cl-image *ngIf="profileData.userInfo.userpic.length" class="avatar" secure="true" public-id="{{ profileData.userInfo.userpic }}"
+                    format="jpg">
+                </cl-image>
+                <img *ngIf="!profileData.userInfo.userpic.length" class="avatar" src="assets/home/error-image-generic.png" alt="..">
+                <span class="edits">&#9998;</span>
+                <span class="edits-background"></span>
+            </div>
+
+        </div>
+        <form class="edit-profile-form" #editProfile="ngForm">
+            <div class="user-data" ngModelGroup="eventData" #eventData="ngModelGroup">
+
+                <div class="form-group">
+                    <label for="firstName">{{ 'EDITPROFILE.TITLE.FIRSTNAME' | translate }}</label>
+                    <input maxlength="20" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.NAME' | translate }}" type="eventTitle" id="firstName" class="form-control"
+                        [(ngModel)]="profileData.userInfo.firstname" name="firstName" required firstName #firstName="ngModel">
+                    <span *ngIf="!noWhitespaceValidator(firstName) || firstName.touched && !firstName.valid" class="valid-error">{{ 'EDITPROFILE.ERROR.FIRSTNAME' | translate }}</span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">{{ 'EDITPROFILE.TITLE.LASTNAME' | translate }}</label>
+                    <input maxlength="20" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.SURNAME' | translate }}" type="eventTitle" id="lastName" class="form-control"
+                        [(ngModel)]="profileData.userInfo.lastname" name="lastName" required lastName #lastName="ngModel">
+                    <span *ngIf="!noWhitespaceValidator(lastName) || lastName.touched && !lastName.valid" class="valid-error">{{ 'EDITPROFILE.ERROR.LASTNAME' | translate }}</span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="middleName">{{ 'EDITPROFILE.TITLE.MIDDLENAME' | translate }}</label>
+                    <input maxlength="20" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.MIDDLENAME' | translate }}" type="eventTitle" id="middleName"
+                        class="form-control" [(ngModel)]="profileData.userInfo.middlename" name="middleName" required middleName
+                        #middleName="ngModel">
+                    <span *ngIf="!noWhitespaceValidator(middleName) || middleName.touched && !middleName.valid" class="valid-error">{{ 'EDITPROFILE.ERROR.MIDDLENAME' | translate }}</span>
+
+                </div>
+
+                <div class="form-group age-form">
+                    <mat-form-field class="form-group">
+                        <label for="age">{{ 'EDITPROFILE.TITLE.AGE' | translate }}</label>
+                        <mat-select [(ngModel)]="age" [ngModelOptions]="{standalone: true}" (change)="setAge($event)" class="form-control" panelClass="age-dropdown-class">
+                            <mat-option *ngFor="let age of ( 80 | ageList: 18 )" [value]="age">
+                                {{ age }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field class="form-group experience-form">
+                        <label for="experience">{{ 'EDITPROFILE.TITLE.EXPERIENCE' | translate }}</label>
+                        <mat-select [(ngModel)]="experience" [ngModelOptions]="{standalone: true}" (change)="setExperience($event)" class="form-control"
+                            panelClass="experience-dropdown-class">
+                            <mat-option *ngFor="let experience of ( 15 | ageList: 1 )" [value]="experience">
+                                {{ experience }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="region-form">
+                    <div class="form-group">
+                        <label for="region">{{ 'EDITPROFILE.TITLE.REGION' | translate }}</label>
+                        <div>
+                            <ng4geo-autocomplete (change)="checkRegion()" [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                            <span *ngIf="!regionId.length" class="valid-error">{{ 'EDITPROFILE.ERROR.REGION' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="interests" class="interests">{{ 'EDITPROFILE.TITLE.INTERESTS' | translate }}</label>
+                    <textarea [(ngModel)]="profileData.userInfo.interests" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.INTERESTS' | translate }}"
+                        rows="2" maxlength="1000" type="interests" id="interests" class="form-control" ngModel name="interests"
+                        required interests #interests="ngModel">
+                    </textarea>
+                    <span *ngIf="!noWhitespaceValidator(interests) || interests.touched && !interests.valid" class="valid-error">{{ 'EDITPROFILE.ERROR.INTERESTS' | translate }}</span>
+                </div>
+
+                <div class="works-input">
+                    <label class="works-label" for="work">{{ 'EDITPROFILE.TITLE.WORKDOMAIN' | translate }}</label>
+                    <mat-form-field class="demo-chip-list">
+                        <mat-chip-list #workList>
+                            <mat-chip *ngFor="let work of profileData.userInfo.works" [selectable]="selectable" [removable]="removable" (remove)="removeWork(work)">
+                                {{work}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input maxlength="20" #worksInput #fileInput="ngModel" ngModel name="works" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.WORKDOMAINS' | translate}}"
+                                id="works-label" [matChipInputFor]="workList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addWork($event)" (input)="setNewWork($event.target.value)"
+                            />
+                        </mat-chip-list>
+                    </mat-form-field>
+                    <span *ngIf="checkWorks(fileInput)" class="valid-error">{{ 'EDITPROFILE.ERROR.WORKDOMAIN' | translate }}</span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="description">{{ 'EDITPROFILE.TITLE.DESCRIPTION' | translate }}</label>
+                    <textarea maxlength="1000" [(ngModel)]="profileData.userInfo.description" placeholder="{{ 'EDITPROFILE.PLACEHOLDER.DESCRIPTION' | translate}}"
+                        rows="4" type="description" id="description" ngModel class="form-control" ngModel name="description"
+                        required description #description="ngModel">
+                    </textarea>
+                    <span *ngIf="!noWhitespaceValidator(description) || description.touched && !description.valid" class="valid-error">{{ 'EDITPROFILE.ERROR.DESCRIPTION' | translate }}</span>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="edit-footer">
+        <button mat-button class="edit-btn" [disabled]="loading || !eventData.valid || !regionId.length || !works.length || checkForm()"
+            (click)="saveProfileInfo()">
+            {{ 'EDITPROFILE.SAVE' | translate }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+.mat-card.discussion-expert-card {
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #dfdfdf;
+    box-shadow: none!important;
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    position: relative;
+    padding: 24px 0;
+    border-radius: 2px;
+    .discussion-block {
+        overflow: hidden;
+        position: relative;
+        float: left;
+        width: 100%;
+        .image-block {
+            position: relative;
+            float: left;
+            margin-right: 15px;
+            width: 133px;
+            height: 111px;
+            img {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .info {
+            margin: 0;
+            position: relative;
+            float: left;
+            width: calc(100% + -160px);
+            .info-title {
+                margin: 0;
+                &.info-header {
+                    font-family: roboto;
+                    font-size: 29px;
+                    font-weight: bold;
+                    text-align: left;
+                    color: #2b094d;
+                }
+                &.info-sub {
+                    font-family: roboto;
+                    font-size: 21px;
+                    font-weight: normal;
+                    text-align: left;
+                    color: #2b094d; 
+                }
+            }
+            .menu-block {
+                position: absolute;
+                right: 0;
+                button {
+                    font-size: 31px;
+                    width: 8px;
+                    height: 32px;
+                    opacity: 0.3;
+                    line-height: 35px;
+                    text-align: right;
+                    padding: 0;
+                    min-width: 13px; 
+                    color: #2b094d;
+                    .mat-button-focus-overlay {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            float: left;
+            margin: 0;
+            font-family: roboto;
+            font-size: 21px;
+            font-weight: normal;
+            left: 155px;
+            color: #bfbfbf;            
+            a {
+                color: #bfbfbf;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}

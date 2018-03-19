@@ -1,0 +1,51 @@
+<div class="main-block">
+    <div class="container main">
+        <div class="background-opacity">
+            <div class="register-block">
+                <div class="register-header">
+                    <h1>Organize and event without pain!</h1>
+                </div>
+                <div class="registration">
+                    <h3>{{ 'AUTH.SIGNUP.TITLE' | translate }}</h3>
+                    <app-alerts></app-alerts>
+                    <form (ngSubmit)="onSubmit()" #f="ngForm">
+                        <div class="form-group">
+                            <mat-select class="form-control" name="accountType" placeholder="{{ 'AUTH.SIGNUP.TYPE' | translate }}" (change)="setAccountType($event)">
+                                <!-- You can set some styles for this option(placeholder)  -->
+                                <mat-option *ngFor="let accountType of accountTypes" [value]="accountType">
+                                    {{ 'AUTH.SIGNUP.TYPES.' + accountType | translate }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input placeholder="{{ 'AUTH.SIGNUP.EMAIL' | translate }}" type="email" id="email" class="form-control" ngModel name="email"
+                                    required email #email="ngModel">
+                                <!--<span *ngIf="!email.valid && email.touched" class="help-block">Please enter a valid email</span>-->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input placeholder="{{ 'AUTH.SIGNUP.PASSWORD' | translate }}" type="password" id="password" class="form-control" ngModel
+                                    name="password" required password #password="ngModel">
+                                <!--<span *ngIf="!password.valid && password.touched" class="help-block">Please enter a password</span>-->
+                            </div>
+                        </div>
+
+                        <p style="display: none;" *ngIf="!userData.valid && userData.touched">User Data is invalid</p>
+                        <p class="bottom-txt">{{ 'AUTH.SIGNUP.DESCRIPTION' | translate }}</p>
+                        <button class="btn register-btn btn-default" type="submit" [disabled]="!f.valid || !accountType.length">{{ 'AUTH.SIGNUP.TITLE' | translate | uppercase }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-info">
+        <div class="background-size">
+            <h1 class="about-title">How it works</h1>
+        </div>
+    </div>
+</div>

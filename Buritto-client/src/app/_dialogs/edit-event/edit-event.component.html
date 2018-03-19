@@ -1,0 +1,124 @@
+<div class="edit-event">
+    <div class="edit-title">
+        <span>{{ 'EDITEVENT.NAME' | translate }}</span>
+    </div>
+    <div class="edit-body">
+        <div class="edit-header"></div>
+        <div class="edit-avatar">
+            <label #eventLogoLabel for="eventLogo"></label>
+            <input type="file" (change)="onChangeEventLogo($event)" accept=".jpg, .png, .bmp" id="eventLogo" class="form-control" name="eventLogo"
+                required eventLogo>
+            <div class="images" appCreateEventLogo (filesChangeEmiter)="onDragEventLogo($event)" (filesInvalidEmiter)="onInvalidDragEventLogo($event)"
+                (click)="onUploadEventLogo($event)" [allowed_extensions]="[ 'png', 'jpg', 'bmp' ]">
+                <cl-image *ngIf="eventData.event.eventLogo.length" class="avatar" secure="true" public-id="{{ eventData.event.eventLogo }}"
+                    format="jpg">
+                </cl-image>
+                <img *ngIf="!eventData.event.eventLogo.length" class="avatar" src="assets/home/error-image-generic.png" alt="..">
+                <span class="edits">&#9998;</span>
+                <span class="edits-background"></span>
+            </div>
+
+        </div>
+        <form class="edit-event-form" #editEvent="ngForm">
+            <div class="user-data" ngModelGroup="eventInfo" #eventInfo="ngModelGroup">
+
+                <div class="form-group">
+                    <label for="eventTitle">{{ 'EDITEVENT.TITLE.EVENTTITLE' | translate }}</label>
+                    <input placeholder="{{ 'EDITEVENT.PLACEHOLDER.EVENTTITLE' | translate }}" type="eventTitle" id="eventTitle" class="form-control"
+                        [ngModel]="eventData.event.eventTitle" name="eventTitle" required eventTitle #eventTitle="ngModel">
+                    <span *ngIf="eventTitle.touched && !eventTitle.valid" class="valid-error">{{ 'EDITEVENT.ERROR.EVENTTITLE' | translate }}</span>
+                </div>
+
+                <div class="status-form">
+                    <mat-form-field class="form-group">
+                        <label for="status">{{ 'EDITEVENT.TITLE.STATUS' | translate }}</label>
+                        <mat-select (change)="setStatus($event)" [ngModel]="eventData.event.status" name="status" status #status="ngModel" class="form-control"
+                            placeholder="{{ 'EDITEVENT.PLACEHOLDER.STATUSVALUE' | translate }}" panelClass="status-dropdown-class">
+                            <mat-option *ngFor="let status of statuses" [value]="status">
+                                {{ 'EDITEVENT.PLACEHOLDER.STATUS.' + status | translate }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <div class="first-picker">
+                        <label for="eventStart">{{ 'EDITEVENT.TITLE.EVENTSTART' | translate }}</label>
+                        <mat-form-field (click)="setFirstDate($event.target.value)" (change)="setFirstDate($event.target.value)" class="from-date">
+                            <input (click)="picker.open()" (input)="setFirstDate($event.target.value)" [matDatepicker]="picker" [ngModel]="eventData.event.eventStart"
+                                name="eventStart" matInput placeholder="{{ 'EDITEVENT.PLACEHOLDER.EVENTSTART' | translate }}">
+                            <span (click)="picker.open()" class="first-arrow"></span>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker (selectedChanged)="setFirstDate($event)" panelClass="event-date-menu" #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="second-picker">
+                        <label for="eventFinish">{{ 'EDITEVENT.TITLE.EVENTEND' | translate }}</label>
+                        <mat-form-field (click)="setSecondDate($event.target.value)" (change)="setSecondDate($event.target.value)" class="from-date">
+                            <input (click)="pickerEnd.open()" (input)="setSecondDate($event.target.value)" [matDatepicker]="pickerEnd" [ngModel]="eventData.event.eventFinish"
+                                name="eventFinish" matInput placeholder="{{ 'EDITEVENT.PLACEHOLDER.EVENTEND' | translate }}">
+                            <span (click)="pickerEnd.open()" class="second-arrow"></span>
+                            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                            <mat-datepicker (selectedChanged)="setSecondDate($event)" panelClass="event-date-menu" #pickerEnd></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="region-form">
+                    <div class="form-group">
+                        <label for="region">{{ 'EDITEVENT.TITLE.REGION' | translate }}</label>
+                        <div>
+                            <ng4geo-autocomplete (ngModelChange)="checkRegion()" required ngModel name="region" region #region="ngModel" ngDefaultControl
+                                [userSettings]="regionSettings" (componentCallback)="autoCompleteCallback($event)"></ng4geo-autocomplete>
+                            <span *ngIf="!regionId.length" class="valid-error">{{ 'EDITEVENT.ERROR.REGION' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tags-input">
+                    <label class="tags-label" for="tag">{{ 'EDITEVENT.TITLE.TAGS' | translate }}</label>
+                    <mat-form-field class="demo-chip-list">
+                        <mat-chip-list #tagList>
+                            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (remove)="removeTag(tag)">
+                                {{tag}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input #fileInput placeholder="Tag" placeholder="{{ 'EDITEVENT.PLACEHOLDER.TAGS' | translate}}" id="tags-label" [matChipInputFor]="tagList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addTag($event)"
+                                (input)="setNewTag($event.target.value)" />
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+
+                <div class="domains-input">
+                    <label class="domains-label" for="domain">{{ 'EDITEVENT.TITLE.DOMAINS' | translate }}</label>
+                    <mat-form-field class="demo-chip-list">
+                        <mat-chip-list #domainList>
+                            <mat-chip *ngFor="let domain of domains" [selectable]="selectable" [removable]="removable" (remove)="removeDomain(domain)">
+                                {{domain}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input #fileInput placeholder="Domain" placeholder="{{ 'EDITEVENT.PLACEHOLDER.DOMAINS' | translate}}" id="domains-label"
+                                [matChipInputFor]="domainList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="addDomain($event)" (input)="setNewDomain($event.target.value)" />
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="description">{{ 'EDITEVENT.TITLE.DESCRIPTION' | translate }}</label>
+                    <textarea placeholder="{{ 'EDITEVENT.PLACEHOLDER.DESCRIPTION' | translate}}" rows="4" type="description" id="description"
+                        class="form-control" [ngModel]="eventData.event.description" name="description" required description
+                        #description="ngModel">
+                    </textarea>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="edit-footer">
+        <button mat-button class="edit-btn" [disabled]="loading || !regionId.length || !eventTitle.valid" (click)="saveEventInfo()">
+            {{ 'EDITEVENT.SAVE' | translate }}
+        </button>
+    </div>
+</div>

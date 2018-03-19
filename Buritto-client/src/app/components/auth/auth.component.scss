@@ -1,0 +1,20 @@
+/*global color*/
+
+.sign-in {
+    background: url("./../../../assets/home/background1.jpg");
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-repeat: no-repeat;
+    padding: 0;
+    background-position: center;
+    background-size: cover;
+    right: 0;
+    left: 0;
+    height: 462.75px;
+    min-width: 960px;
+    .background-opacity {
+        background-color: rgba(79, 44, 115, 0.79);
+        height: 100%;
+    }
+}

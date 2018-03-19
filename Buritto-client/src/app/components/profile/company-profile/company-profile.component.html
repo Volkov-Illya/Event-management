@@ -1,0 +1,51 @@
+<div class="manager-profile">
+    <section>
+        <mat-card class="manager-block">
+            <div class="left-block">
+                <mat-card-title class="title-page-header">{{'PROFILE.MANAGERNAME' | translate}}:
+                    <span class="full-name">{{fullName}}</span>
+                    <span (click)="openDialog()" class="edits">&#9998;</span>
+                </mat-card-title>
+
+                <mat-card-content>
+                    <mat-card-title class="title-page">{{'PROFILE.COMPANYNAME' | translate}}:
+                        <span class="sub">no company</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{'PROFILE.EXPERIENCE' | translate}}:
+                        <span class="sub">{{experience}}</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{'PROFILE.REGION' | translate}}:
+                        <span class="sub">{{userInfo.region}}</span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{'PROFILE.DOMAIN' | translate}}:
+                        <span *ngFor="let work of userInfo.works" class="sub">{{work}}, </span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{'PROFILE.MEDIA' | translate}}:
+                        <span class="sub">{{userInfo.medias}} </span>
+                    </mat-card-title>
+                    <mat-card-title class="title-page">{{'PROFILE.INTERESTS' | translate}}:
+                        <span class="sub">{{userInfo.interests}}</span>
+                    </mat-card-title>
+                </mat-card-content>
+            </div>
+            <div class="right-img">
+                <img *ngIf="!userInfo.userpic.length" mat-card-image src="/assets/home/image-not-found.png" />
+                <cl-image *ngIf="userInfo.userpic.length" secure="true" public-id="{{ userInfo.userpic }}" format="jpg"></cl-image>
+            </div>
+        </mat-card>
+    </section>
+    <section class="company-events-block">
+        <div class="companies-container">
+            <h3 class="title">{{'PROFILE.MYCOMPANIES' | translate}}</h3>
+            <div class="companies-block">
+
+            </div>
+        </div>
+        <div class="experts-container">
+            <h3 class="title">{{'PROFILE.MYEVENTS' | translate}}</h3>
+            <div class="experts-block">
+
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,27 @@
+<mat-card class="discussion-card">
+    <mat-card-content class="discussion-block">
+        <div class="image-block">
+            <img *ngIf="!event.eventLogo.length" mat-card-image src="assets/home/error-image-generic.png" alt="..">
+            <cl-image *ngIf="event.eventLogo.length" secure="true" public-id="{{ event.eventLogo }}" format="jpg"></cl-image>
+        </div>
+        <mat-card-header class="info">
+            <mat-card-title class="info-title info-header" routerLinkActive="active">
+                <a [routerLink]="['/events/item', event.eventId]">{{ 'EVENTS.ITEM.TITLE' | translate }}: {{ event.eventTitle }}</a>
+            </mat-card-title>
+            <mat-card-subtitle class="info-title info-sub" routerLinkActive="active">{{ 'EVENTS.ITEM.DATE' | translate }}: {{ event.eventStart | date: 'dd.MM.yyyy' }}</mat-card-subtitle>
+            <mat-card-subtitle class="info-title info-sub" routerLinkActive="active">{{ 'EVENTS.ITEM.REGION' | translate }}: {{ event.region }}</mat-card-subtitle>
+            <mat-card-subtitle class="info-title info-sub" routerLinkActive="active">{{ 'EVENTS.ITEM.DOMAINS' | translate }}: {{ event.domains }}</mat-card-subtitle>
+            <div class="menu-block">
+                <button mat-button [matMenuTriggerFor]="menu" class="test"></button>
+                <mat-menu xPosition="before" #menu="matMenu" class="item-style">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </div>
+        </mat-card-header>
+        <mat-card-footer class="footer">
+            <a *ngFor="let tag of event.tags">#{{tag}}</a>
+        </mat-card-footer>
+    </mat-card-content>
+</mat-card>
+<!-- routerLink="/events/events-manager" -->

@@ -1,0 +1,19 @@
+{
+  "name": "buritto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohmed/Burrito.git"
+  },
+  "author": "illya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ohmed/Burrito/issues"
+  },
+  "homepage": "https://github.com/ohmed/Burrito#readme"
+}

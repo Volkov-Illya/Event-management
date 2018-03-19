@@ -1,0 +1,114 @@
+.manager-profile {
+    max-width: 1280px;
+    min-width: 1280px;
+    margin: 43px auto 0 auto;
+    overflow: hidden;
+    mat-card.manager-block {
+        overflow: hidden;
+        box-shadow: none;
+        padding: 0;
+        .left-block {
+            width: 884px;
+            position: relative;
+            float: left;
+            margin-right: 35px;
+            .title-page-header {
+                font-size: 25px;
+                font-weight: bold;
+                margin-bottom: 7px;
+                color: #2b094d;
+                .full-name {
+                    font-weight: normal;
+                }
+                .edits {
+                    opacity: 0.45;
+                    font-family: roboto;
+                    font-size: 25px;
+                    font-weight: normal;
+                    color: #2b094d;
+                    cursor: pointer;
+                }
+            }
+            .title-page {
+                font-family: roboto;
+                font-size: 21px;
+                font-weight: bold;
+                text-align: left;
+                color: #2b094d;
+                position: relative;
+                margin-bottom: 16px;
+                .sub {
+                    font-weight: 400;
+                    font-size: 21px;
+                }
+            }
+            .sub-link {
+                opacity: 0.5;
+                font-family: roboto;
+                font-size: 21px;
+                font-weight: normal;
+                text-align: left;
+                a {
+                    color: rgba(43, 9, 77, 0.5);
+                    text-decoration: none;
+                }
+            }
+        }
+        .right-img {
+            float: left;
+            width: 361px;
+            height: 400px;
+            position: relative;
+            text-align: right;
+            margin-top: 40px;
+            .mat-card-image {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                object-fit: cover;
+            }
+        }
+    }
+    .company-events-block {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        margin-top: 25px;
+        .companies-container {
+            position: relative;
+            float: left;
+            .title {
+                margin-bottom: 17px;
+                font-family: roboto;
+                font-size: 21px;
+                font-weight: bold;
+                color: #2b094d;
+            }
+            .companies-block {
+                width: 625px;
+                height: 321px;
+                background: grey;
+            }
+        }
+        .experts-container {
+            position: relative;
+            float: right;
+            .title {
+                margin-bottom: 17px;
+                font-family: roboto;
+                font-size: 21px;
+                font-weight: bold;
+                color: #2b094d;
+            }
+            .experts-block {
+                width: 625px;
+                height: 321px;
+                background: grey;
+                position: relative;
+            }
+        }
+    }
+}

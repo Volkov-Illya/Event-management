@@ -1,0 +1,73 @@
+<div class="header">
+    <div class="container-fluid-header">
+        <div class="collapse-header ">
+            <ul class="navbar-left-header">
+                <li>
+                    <ul class="navbar-left-links">
+                        <li routerLinkActive="active">
+                            <img src="assets/home/Logo.png" alt="logo">
+                        </li>
+                        <li *ngIf="!isProfileCompleted() && !isAuthenticated()">
+                            <a routerLinkActive="active-link" routerLink="/features">{{ 'HEADER.FEATURES' | translate }}</a>
+                        </li>
+                        <li *ngIf="!isProfileCompleted() && !isAuthenticated()">
+                            <a routerLinkActive="active-link" routerLink="/pricing">{{ 'HEADER.PRICING' | translate }}</a>
+                        </li>
+                        <li *ngIf="!isProfileCompleted() && isAuthenticated()">
+                            <a routerLinkActive="active-link" routerLink="/pricing">{{ 'HEADER.FINISHING' | translate }}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li *ngIf="isProfileCompleted()">
+                    <ul class="navbar-left-links">
+                        <li>
+                            <a routerLinkActive="active-link" routerLink="/main">{{ 'HEADER.MAIN' | translate }}</a>
+                        </li>
+                        <li>
+                            <a routerLinkActive="active-link" routerLink="/experts">{{ 'HEADER.EXPERTS' | translate }}</a>
+                        </li>
+                        <li>
+                            <a routerLinkActive="active-link" routerLink="/events">{{ 'HEADER.EVENTS' | translate }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-right-header">
+
+                <ng-template [ngIf]="!isAuthenticated()">
+                    <li routerLinkActive="active">
+                        <a routerLink="/auth/signin">{{ 'HEADER.SIGNIN' | translate }}</a>
+                    </li>
+                    <li>
+                        <span class="auth-middle">{{ 'HEADER.OR' | translate }}</span>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/auth/signup">{{ 'HEADER.SIGNUP' | translate }}</a>
+                    </li>
+                </ng-template>
+                <li class="language-menu">
+                    <button [ngClass]="setCountryFlag()" class="translate-btn" (mouseenter)="menuTrigger.openMenu()" #menuTrigger="matMenuTrigger"
+                        mat-menu-item [matMenuTriggerFor]="translateMenu">
+                        {{language}}
+                    </button>
+                    <mat-menu #translateMenu="matMenu" classList="language-dropdown-menu">
+                        <span (mouseleave)="menuTrigger.closeMenu()">
+                            <button [ngClass]="setItemFlag('RU')" class=" flag" mat-menu-item (click)="switchLanguage('ru')">RU</button>
+                            <button [ngClass]="setItemFlag('EN')" class=" flag" mat-menu-item (click)="switchLanguage('en')">EN</button>
+                        </span>
+                    </mat-menu>
+                </li>
+                <li class="header-menu" *ngIf="isAuthenticated()">
+                    <button class="header-title" mat-menu-item #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="headerMenu">{{firstName ? firstName : email}}</button>
+                    <span>
+                        <mat-menu #headerMenu="matMenu" classList="header-dropdown-menu">
+                            <button class="header-title" mat-menu-item (click)="goToProfile()">{{ 'HEADER.PROFILE' | translate }}</button>
+                            <button class="header-title" mat-menu-item (click)="onLogout()">{{ 'HEADER.LOGOUT' | translate }}</button>
+                        </mat-menu>
+                    </span>
+                </li>
+                <li style="width: 10px"></li>
+            </ul>
+        </div>
+    </div>
+</div>
